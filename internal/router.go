@@ -9,10 +9,11 @@ func NewRouter() *gin.Engine {
 	r := gin.Default()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
-	authRouter := r.Group("/auth")
+	v1 := r.Group("/v1")
+	v1Auth := v1.Group("/auth")
 	{
 		c := auth.NewController()
-		authRouter.GET("/health-check", c.Healthcheck)
+		v1Auth.GET("/health-check", c.Healthcheck)
 	}
 
 	return r
