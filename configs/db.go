@@ -1,16 +1,18 @@
 package configs
 
 import (
+	"fmt"
 	"github.com/kamva/mgm/v3"
 	"github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"os"
 )
 
-func InitMgm() {
-	err := mgm.SetDefaultConfig(nil, "mgm_lab", options.Client().ApplyURI("mongodb+srv://root:kZlVwPbY2936GSjV@cluster0.vt02bgc.mongodb.net/?retryWrites=true&w=majority"))
+func InitDB() {
+	uri := fmt.Sprintf("mongodb+srv://%s:%s@%s/%s?%s", os.Getenv("DB_USER_NAME"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_HOSTNAME"), os.Getenv("DB_DATABASE_NAME"), os.Getenv("DB_OPTION_STRINGS"))
+	err := mgm.SetDefaultConfig(nil, "mgm_lab", options.Client().ApplyURI(uri))
 	if err != nil {
-		logrus.Errorln("failed to initialize mgm default configurations:", err)
-		panic("occurs panic when failed to initialize mgm")
+		logrus.Fatalln("failed to initialize mgm default configurations:", err)
 	}
 
 	logrus.Infoln("Success to initialize mgm default configurations")
