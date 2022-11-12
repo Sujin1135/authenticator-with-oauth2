@@ -2,7 +2,7 @@ package main
 
 import (
 	"auth/configs"
-	"auth/internal"
+	"auth/internal/api"
 	"github.com/joho/godotenv"
 	"log"
 )
@@ -13,6 +13,6 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 	configs.InitDB()
-	r := internal.NewRouter()
+	r := api.NewRouter()
 	r.Run()
 }
