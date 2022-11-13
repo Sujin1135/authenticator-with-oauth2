@@ -9,7 +9,7 @@ import (
 )
 
 func InitDB() {
-	uri := fmt.Sprintf("mongodb+srv://%s:%s@%s/%s?%s", os.Getenv("DB_USER_NAME"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_HOSTNAME"), os.Getenv("DB_DATABASE_NAME"), os.Getenv("DB_OPTION_STRINGS"))
+	uri := fmt.Sprintf("%s://%s/%s?%s", os.Getenv("DB_PROTOCOL"), os.Getenv("DB_HOSTNAME"), os.Getenv("DB_DATABASE_NAME"), os.Getenv("DB_OPTION_STRINGS"))
 	err := mgm.SetDefaultConfig(nil, "mgm_lab", options.Client().ApplyURI(uri))
 	if err != nil {
 		logrus.Fatalln("failed to initialize mgm default configurations:", err)
