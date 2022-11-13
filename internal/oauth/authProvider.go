@@ -15,12 +15,12 @@ type AuthProvider struct {
 }
 
 type RedirectInfo struct {
-	clientId    string
-	redirectUrl string
+	ClientId    string
+	RedirectUrl string
 }
 
 func (auth *AuthProvider) Redirect() *RedirectInfo {
-	return &RedirectInfo{clientId: auth.config.ClientID, redirectUrl: auth.config.RedirectURL}
+	return &RedirectInfo{ClientId: auth.config.ClientID, RedirectUrl: auth.config.RedirectURL}
 }
 
 func (auth *AuthProvider) Callback(authCode string) ([]byte, error) {

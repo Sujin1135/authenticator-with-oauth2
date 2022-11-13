@@ -14,8 +14,8 @@ func NewRouter() *gin.Engine {
 	{
 		c := auth.NewController()
 		v1Auth.GET("/health-check", c.Healthcheck)
-		v1Auth.GET("/auth/:provider/redirect", c.Redirect)
-		v1Auth.POST("/auth/:provider/callback", c.Callback)
+		v1Auth.GET("/:provider/redirect", c.Redirect)
+		v1Auth.POST("/:provider/callback", c.Callback)
 	}
 
 	return r

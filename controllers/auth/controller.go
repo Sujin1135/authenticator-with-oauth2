@@ -17,13 +17,13 @@ func NewController() *Controller {
 }
 
 func (*Controller) Healthcheck(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"data": true})
+	c.JSON(http.StatusOK, gin.H{"Result": true})
 }
 
 func (*Controller) Redirect(c *gin.Context) {
 	provider, err := oauth.GetAuthProvider(c.Param("provider"))
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		c.JSON(http.StatusNotFound, err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, provider.Redirect())
