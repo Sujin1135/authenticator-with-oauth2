@@ -44,8 +44,12 @@ func (auth *AuthProvider) Callback(authCode string) ([]byte, error) {
 	return contents, nil
 }
 
-var authProviders = map[string]*AuthProvider{
-	"google": &AuthProvider{config: google.GoogleConfig, apiUrl: google.GoogleApiUrl},
+var authProviders map[string]*AuthProvider
+
+func InitAuthProviders() {
+	authProviders = map[string]*AuthProvider{
+		"google": {config: google.GetConfig(), apiUrl: google.GoogleApiUrl},
+	}
 }
 
 func GetAuthProvider(name string) (*AuthProvider, error) {
